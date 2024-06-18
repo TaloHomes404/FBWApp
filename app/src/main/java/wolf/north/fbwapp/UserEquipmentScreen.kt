@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -44,6 +45,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 
 class UserEquipmentScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -56,9 +58,8 @@ class UserEquipmentScreen : ComponentActivity() {
 
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
-@Preview(showSystemUi = true)
 @Composable
-fun UserEquipmentDefault() {
+fun UserEquipmentDefault(navController: NavHostController) {
     val equipmentList = listOf("Dumbbell", "Barbell", "Resistance band", "Ketlebell", "Training Bench", "Bodyweight", "Gym Machines")
     val equipmentIcons = mapOf(
         "Dumbbell" to R.drawable.dumbbells,
@@ -76,7 +77,7 @@ fun UserEquipmentDefault() {
                     Text(text = "Enter your equipment")
                 }, modifier = Modifier.padding(8.dp),
                 navigationIcon = {
-                    IconButton(onClick = { /* TODO */ }) {
+                    IconButton(onClick = { navController.popBackStack() }) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
                             contentDescription = "Back"
@@ -106,7 +107,7 @@ fun UserEquipmentDefault() {
                 }
             }
         Spacer(modifier = Modifier.size(15.dp))
-            UserInfoSection(viewModel = UserInfoViewModel())
+            UserInfoSection(viewModel = UserInfoViewModel(), navController = navController)
         }
         }
     )
@@ -116,6 +117,7 @@ fun UserEquipmentDefault() {
 fun EquipmentTypeItem(equipment: String, iconResId: Int) {
 
     var isChecked by remember {mutableStateOf(false)}
+
 
     Row(
         modifier = Modifier
@@ -147,7 +149,7 @@ fun EquipmentTypeItem(equipment: String, iconResId: Int) {
 }
 
 @Composable
-fun UserInfoSection(viewModel: UserInfoViewModel) {
+fun UserInfoSection(viewModel: UserInfoViewModel, navController: NavHostController) {
     var userName by remember { mutableStateOf("") }
 
     Column(
@@ -173,11 +175,11 @@ fun UserInfoSection(viewModel: UserInfoViewModel) {
         Text(
             text = "continue as guest",
             color = Color.Blue,
-            modifier = Modifier.padding(top = 2.dp)
+            modifier = Modifier.padding(top = 2.dp).clickable { navController.navigate("home") }
         )
 
         Row(modifier = Modifier.fillMaxSize(), verticalAlignment = Alignment.Bottom) {
-            Button(onClick = { /*TODO*/ },
+            Button(onClick = { navController.navigate("home") },
                 modifier = Modifier
                     .fillMaxWidth(),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black),

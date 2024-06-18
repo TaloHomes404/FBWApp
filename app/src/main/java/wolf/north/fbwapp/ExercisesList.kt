@@ -1,4 +1,4 @@
-package wolf.north.fbwapp.ui.theme
+package wolf.north.fbwapp
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -21,34 +21,35 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
+import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.outlined.Favorite
+import androidx.compose.material.icons.outlined.Menu
+import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import wolf.north.fbwapp.WorkoutTypeComposable
-import wolf.north.fbwapp.WorkoutViewModel
-import wolf.north.fbwapp.ui.theme.ui.theme.FBWAppTheme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 
 class ExercisesList : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,14 +63,14 @@ class ExercisesList : ComponentActivity() {
 @SuppressLint("UnusedMaterial3ScaffoldPaddingParameter")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ExercisesListScreen(viewModel: WorkoutViewModel) {
+fun ExercisesListScreen(viewModel: WorkoutViewModel, navController: NavHostController) {
 
     Scaffold(
         topBar = {
             TopAppBar(
                 title = {
                     Row(verticalAlignment = Alignment.CenterVertically) {
-                        IconButton(onClick = { /* Obsługa kliknięcia strzałki w lewo */ }) {
+                        IconButton(onClick = { navController.popBackStack() }) {
                             Icon(Icons.Default.ArrowBack, contentDescription = "Back")
                         }
                         Spacer(modifier = Modifier.width(25.dp))
@@ -78,6 +79,71 @@ fun ExercisesListScreen(viewModel: WorkoutViewModel) {
                 }
             )
         },
+        bottomBar = {
+            BottomAppBar(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .clip(RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)),
+                containerColor = Color.Black,
+                contentColor = Color.Gray,
+                tonalElevation = 5.dp,
+            ) {
+                Row(
+                    modifier = Modifier
+                        .fillMaxSize()
+                        .padding(horizontal = 20.dp),
+                    horizontalArrangement = Arrangement.SpaceAround
+                ) {
+                    //Bottom Bar Icon #1
+                    BottomNavigationItem(
+                        selected = true,
+                        onClick = { navController.navigate("home") },
+                        icon = {
+                            Icon(imageVector = Icons.Filled.Home, contentDescription = null)
+                        },
+                        selectedContentColor = Color.White
+                    )
+                    //Bottom Bar Icon #2
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = { navController.navigate("exercises_list") },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Menu,
+                                contentDescription = null
+                            )
+                        },
+                        unselectedContentColor = Color.Gray
+                    )
+                    //Bottom Bar Icon #3
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = { navController.navigate("workout_plans") },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Favorite,
+                                contentDescription = null
+                            )
+                        },
+                        unselectedContentColor = Color.Gray
+                    )
+                    //Bottom Bar Icon #4
+                    BottomNavigationItem(
+                        selected = false,
+                        onClick = { navController.navigate("profile_screen") },
+                        icon = {
+                            Icon(
+                                imageVector = Icons.Outlined.Person,
+                                contentDescription = null
+                            )
+                        },
+                        unselectedContentColor = Color.Gray
+                    )
+                }
+            }
+        },
+
+
         content = {
             // Treść ekranu
             Column(
@@ -176,5 +242,5 @@ fun ExercisesListShow(viewModel: WorkoutViewModel) {
 @Preview(showSystemUi = true)
 @Composable
 fun ExercisesListPreview() {
-    ExercisesListScreen(viewModel = WorkoutViewModel())
+    ExercisesListScreen(viewModel = WorkoutViewModel(), navController = rememberNavController())
 }

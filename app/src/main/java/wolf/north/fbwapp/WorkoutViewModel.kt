@@ -4,7 +4,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
-import wolf.north.fbwapp.ui.theme.FBWPlan
 
 class WorkoutViewModel : ViewModel() {
     // Stan dla aktualnie wybranej kategorii
@@ -49,21 +48,44 @@ class WorkoutViewModel : ViewModel() {
         Exercise("Tricep Dips", "Triceps", R.drawable.chair_dips),
         Exercise("Chair Dips", "Triceps", R.drawable.chair_dips),
 
-    )
+        )
 
     val fbwPlans = listOf(
         FBWPlan(
             name = "FBW Plan - Arms Focused",
             imageResId = R.drawable.arms_fbw1,
             duration = "45 min",
-            level = "Beginner"
+            level = "Beginner",
+            description = "Full Body Workout focused with compound exercises and isolation one for huge arms"
         ),
         FBWPlan(
             name = "FBW Plan - Back Focused",
             imageResId = R.drawable.back_fbw1,
             duration = "45 min",
-            level = "Intermediate"
-        ),)
+            level = "Intermediate",
+            description = "Full body workout with compound exercises targeting all back parts"
+        ),
+        FBWPlan(
+            name = "FBW Plan - Complete Legs",
+            imageResId = R.drawable.fbw_legs1,
+            duration = "50 min",
+            level = "Beginner",
+            description = "Full body workout, feel the burn with exercises targeting whole legs muscles"
+        )
+    )
+
+    //Przechowuje wybrany plan
+    var selectedPlan by mutableStateOf<FBWPlan?>(null)
+
+    //Przechowuje nowy plan (ten do zapisania na głownym ekranie)
+    //Funkcjonalność do add to favourites w liście planów
+    var currentPlan by mutableStateOf<FBWPlan?>(null)
+        private set
+
+    //Funkcja do inicjowania zmiennej plan, setter
+    fun selectCurrentPlan(plan: FBWPlan) {
+        currentPlan = plan
+    }
 
     // Funkcja do filtrowania ćwiczeń na podstawie wybranej kategorii
     fun getExercisesForCategory(category: String): List<Exercise> {

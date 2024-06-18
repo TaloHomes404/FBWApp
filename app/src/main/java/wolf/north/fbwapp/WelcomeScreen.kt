@@ -35,37 +35,48 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import wolf.north.fbwapp.ui.theme.FBWAppTheme
+
 
 class WelcomeScreen : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
+            FBWAppTheme {
+                WelcomeScreen(navController = rememberNavController())
+            }
         }
     }
 }
-
 
 @Composable
 fun EntryScreenImageAndBg() {
 
-    Box(modifier = Modifier
-        .fillMaxWidth()
-        .height(400.dp)
-        .clip(
-            RoundedCornerShape(bottomStart = 125.dp, bottomEnd = 125.dp,)
-        )
-        .background(color = Color.Black)
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(400.dp)
+            .clip(
+                RoundedCornerShape(bottomStart = 125.dp, bottomEnd = 125.dp)
+            )
+            .background(color = Color.Black)
 
     ) {
-        Row(modifier = Modifier.fillMaxSize(),
+        Row(
+            modifier = Modifier.fillMaxSize(),
             horizontalArrangement = Arrangement.Center,
-            verticalAlignment = Alignment.Bottom){
+            verticalAlignment = Alignment.Bottom
+        ) {
 
-            Image(painter = painterResource(id = R.drawable.fitness_woman),
+            Image(
+                painter = painterResource(id = R.drawable.fitness_woman),
                 contentDescription = "welcome screen fitness woman picture",
-                modifier = Modifier.padding(top = 32.dp))
+                modifier = Modifier.padding(top = 32.dp)
+            )
         }
 
     }
@@ -74,13 +85,15 @@ fun EntryScreenImageAndBg() {
 
 
 @Composable
-fun EntryScreenTitleAndDesc() {
+fun EntryScreenTitleAndDesc(navController: NavController) {
+
+
     //Default values
     val titleString = stringResource(R.string.entryScreenTitle)
     val descString = stringResource(R.string.entryScreenDescprition)
     val buttonText = stringResource(R.string.entryScreenButtonText)
-    val titleSize = MaterialTheme.typography.displayLarge.fontSize
-    val descSize= MaterialTheme.typography.bodyLarge.fontSize
+    val titleSize = MaterialTheme.typography.displayMedium.fontSize
+    val descSize = MaterialTheme.typography.bodyLarge.fontSize
     val buttonTextSize = MaterialTheme.typography.headlineSmall.fontSize
     val fontStyle = FontStyle.Italic
     val fontWeight = FontWeight.Bold
@@ -88,11 +101,14 @@ fun EntryScreenTitleAndDesc() {
 
 
 
-    Column(modifier = Modifier
-        .fillMaxWidth().fillMaxHeight()
-        .background(color = Color.White)
-        .padding(8.dp),
-        horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+            .background(color = Color.White)
+            .padding(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             text = titleString,
             fontSize = titleSize,
@@ -111,16 +127,18 @@ fun EntryScreenTitleAndDesc() {
             style = TextStyle(letterSpacing = 0.15.sp),
             fontStyle = fontStyle,
             fontWeight = fontWeight,
-            color = Color.DarkGray,
+            color = Color.Black,
             textAlign = TextAlign.Center,
         )
         Row(modifier = Modifier.fillMaxWidth()) {
-            Button(onClick = { /*TODO*/ },
+            Button(
+                onClick = {navController.navigate("user_equipment")},
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(top = 40.dp, start = 12.dp, end = 12.dp, bottom = 12.dp),
+                    .padding(top = 12.dp, start = 12.dp, end = 12.dp, bottom = 12.dp),
                 colors = ButtonDefaults.buttonColors(containerColor = Color.Black),
-                contentPadding = ButtonDefaults.ContentPadding) {
+                contentPadding = ButtonDefaults.ContentPadding
+            ) {
                 Text(text = buttonText, color = Color.White, fontSize = buttonTextSize)
             }
         }
@@ -129,21 +147,25 @@ fun EntryScreenTitleAndDesc() {
 }
 
 
-@Preview(showBackground = true,
-    showSystemUi = true)
+
 @Composable
-fun WelcomeScreenPreview() {
+fun WelcomeScreen(navController: NavController) {
     FBWAppTheme {
-        Surface(modifier = Modifier
-            .fillMaxSize()
-            .background(color = Color.White)) {
+        Surface(
+            modifier = Modifier
+                .fillMaxSize()
+                .background(color = Color.White)
+        ) {
             Column(modifier = Modifier.fillMaxSize()) {
                 EntryScreenImageAndBg()
-                EntryScreenTitleAndDesc()
+                EntryScreenTitleAndDesc(navController = navController)
             }
-
         }
-
-
     }
 }
+
+
+
+
+
+

@@ -1,4 +1,4 @@
-package wolf.north.fbwapp.ui.theme
+package wolf.north.fbwapp
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

@@ -13,12 +13,22 @@
         android:theme="@style/Theme.FBWApp"
         tools:targetApi="31">
         <activity
+            android:name=".ProfileScreen"
+            android:exported="false"
+            android:label="@string/title_activity_profile_screen"
+            android:theme="@style/Theme.FBWApp" />
+        <activity
+            android:name=".HomeScreen"
+            android:exported="false"
+            android:label="@string/title_activity_home_screen"
+            android:theme="@style/Theme.FBWApp" />
+        <activity
             android:name=".WorkoutPlansScreen"
             android:exported="false"
             android:label="@string/title_activity_workout_plans_screen"
             android:theme="@style/Theme.FBWApp" />
         <activity
-            android:name=".ui.theme.ExercisesList"
+            android:name=".ExercisesList"
             android:exported="false"
             android:label="@string/title_activity_exercises_list"
             android:theme="@style/Theme.FBWApp" />
@@ -33,14 +43,8 @@
             android:label="@string/title_activity_welcome_screen"
             android:theme="@style/Theme.FBWApp" />
         <activity
-            android:name=".welcome_screen"
-            android:exported="false"
-            android:label="@string/title_activity_welcome_screen"
-            android:theme="@style/Theme.FBWApp" />
-        <activity
             android:name=".MainActivity"
             android:exported="true"
-            android:label="@string/app_name"
             android:theme="@style/Theme.FBWApp">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -2,9 +2,11 @@
     <string name="app_name">FBWApp</string>
     <string name="title_activity_welcome_screen">welcome_screen</string>
     <string name="entryScreenTitle">Lets change \nfor better ourselfs</string>
-    <string name="entryScreenDescprition"><![CDATA[Just 15 minutes a day\nto form a healthy habit\nand make your life better <3]]></string>
+    <string name="entryScreenDescprition">"Professionally created FBW plans to help with your fitness goals! </string>
     <string name="entryScreenButtonText">Get Started</string>
     <string name="title_activity_user_equipment_screen">UserEquipmentScreen</string>
     <string name="title_activity_exercises_list">ExercisesList</string>
     <string name="title_activity_workout_plans_screen">WorkoutPlansScreen</string>
+    <string name="title_activity_home_screen">HomeScreen</string>
+    <string name="title_activity_profile_screen">ProfileScreen</string>
 </resources>
