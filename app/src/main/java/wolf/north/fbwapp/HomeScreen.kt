@@ -72,14 +72,6 @@ class HomeScreen : ComponentActivity() {
     }
 }
 
-// *TODO* Głowny ekran - wybrany plan ma się wyświetlać, i na dole dodać procent wykonania (np skończony w 73%)
-// *TODO* Implementacja ekranu ćwiczeń, Nazwa ćwiczenia, obraz/gif, ilość powtórzeń, wskazówki odnosnie techniki
-// i na dole dwa przyciski, mam problem i następne ćwiczenie
-// *TODO* Zakładka (ekran) podsumowania, będzie tam wykres odnośnie skali tygodnia ile wykonaliśmy ćwiczeń
-// *TODO* można też dodać w ekranie z inputami ile dni w tygodniu chcemy ćwiczyć
-// *TODO* Tą skurwiałą nawigacje między ekrananami, dolny pasek i odpowiednie ikony dać
-//*TODO* zrobić theme, dwu kolorowy, czcionki itp
-// *TODO* zrobić dokumentacje, commit na gita i lecimy po 3.0
 
 
 @OptIn(ExperimentalMaterial3Api::class)
