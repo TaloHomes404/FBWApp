@@ -6,4 +6,5 @@
     <string name="entryScreenButtonText">Get Started</string>
     <string name="title_activity_user_equipment_screen">UserEquipmentScreen</string>
     <string name="title_activity_exercises_list">ExercisesList</string>
+    <string name="title_activity_workout_plans_screen">WorkoutPlansScreen</string>
 </resources>

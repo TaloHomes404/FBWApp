@@ -4,6 +4,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
+import wolf.north.fbwapp.ui.theme.FBWPlan
 
 class WorkoutViewModel : ViewModel() {
     // Stan dla aktualnie wybranej kategorii
@@ -49,6 +50,20 @@ class WorkoutViewModel : ViewModel() {
         Exercise("Chair Dips", "Triceps", R.drawable.chair_dips),
 
     )
+
+    val fbwPlans = listOf(
+        FBWPlan(
+            name = "FBW Plan - Arms Focused",
+            imageResId = R.drawable.arms_fbw1,
+            duration = "45 min",
+            level = "Beginner"
+        ),
+        FBWPlan(
+            name = "FBW Plan - Back Focused",
+            imageResId = R.drawable.back_fbw1,
+            duration = "45 min",
+            level = "Intermediate"
+        ),)
 
     // Funkcja do filtrowania ćwiczeń na podstawie wybranej kategorii
     fun getExercisesForCategory(category: String): List<Exercise> {
